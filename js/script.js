@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initContactForm();
   initImmoForm();
   initCurrentYear();
+  initCookieBanner();
 });
 
 /* ---------- Header — sticky shadow on scroll ---------- */
@@ -141,6 +142,30 @@ function initCurrentYear() {
   });
 }
 
+/* ---------- Cookie banner ---------- */
+function initCookieBanner() {
+  const banner = document.getElementById("cookie-banner");
+  const acceptBtn = document.getElementById("cookie-accept");
+  if (!banner || !acceptBtn) return;
+
+  // Already accepted? Don't show.
+  try {
+    if (localStorage.getItem("cookie-consent") === "accepted") return;
+  } catch (_) { /* localStorage might be disabled */ }
+
+  banner.hidden = false;
+  // Trigger entry animation on next paint
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => banner.classList.add("is-visible"));
+  });
+
+  acceptBtn.addEventListener("click", () => {
+    try { localStorage.setItem("cookie-consent", "accepted"); } catch (_) {}
+    banner.classList.remove("is-visible");
+    setTimeout(() => { banner.hidden = true; }, 700);
+  });
+}
+
 /* =========================================================
    FORM HANDLERS
    Posts to Google Apps Script Web App as URL-encoded form
@@ -198,6 +223,7 @@ function initContactForm() {
       type: "contact",
       name: fd.get("name"),
       email: fd.get("email"),
+      phone: fd.get("phone") || "",
       subject: fd.get("subject"),
       message: fd.get("message"),
       timestamp: new Date().toISOString(),
@@ -241,9 +267,7 @@ function initImmoForm() {
     const data = {
       type: "immoai_research",
       q1_time_consuming: fd.get("q1"),
-      q2_followups: fd.get("q2"),
-      q3_tools: fd.get("q3"),
-      q4_time_savers: fd.get("q4"),
+      q2_time_savers: fd.get("q2"),
       email: fd.get("email"),
       timestamp: new Date().toISOString(),
     };
