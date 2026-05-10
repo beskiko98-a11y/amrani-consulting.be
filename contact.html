@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" />
-  <link rel="stylesheet" href="css/style.css?v=20260511-2" />
+  <link rel="stylesheet" href="css/style.css?v=20260511-3" />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%230A1929'/><text x='50%25' y='58%25' font-family='Georgia,serif' font-size='34' fill='%23C8A04D' text-anchor='middle' font-style='italic'>A</text></svg>" />
 
@@ -226,6 +226,12 @@
                 <textarea id="message" name="message" required rows="6" placeholder="Décrivez votre besoin, vos contraintes, votre échéance idéale…"></textarea>
               </div>
 
+              <!-- Honeypot anti-spam : champ invisible pour les humains, piège pour les bots -->
+              <div class="hp-field" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden;">
+                <label for="hp_website">Ne pas remplir</label>
+                <input type="text" id="hp_website" name="hp_website" tabindex="-1" autocomplete="off" />
+              </div>
+
               <div class="form-actions">
                 <button type="submit" class="btn btn-primary">
                   Envoyer le message
@@ -417,6 +423,6 @@
     </div>
   </div>
 
-  <script src="js/script.js?v=20260511-2" defer></script>
+  <script src="js/script.js?v=20260511-3" defer></script>
 </body>
 </html>

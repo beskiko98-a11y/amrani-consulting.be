@@ -268,6 +268,39 @@ function setStatus(el, type, message) {
   }
 }
 
+/* =========================================================
+   ANTI-SPAM HELPERS
+   ========================================================= */
+
+/**
+ * Vérifie si le champ honeypot a été rempli.
+ * Un bot remplit tous les champs visibles et invisibles — un humain ne voit pas ce champ.
+ * Retourne true si suspect (= bot probable).
+ */
+function isHoneypotFilled(fd) {
+  const hp = fd.get("hp_website");
+  return hp !== null && hp.trim().length > 0;
+}
+
+/**
+ * Rate limiting côté client via localStorage.
+ * Empêche plusieurs soumissions rapprochées depuis le même navigateur.
+ * @param {string} key   - clé unique par formulaire
+ * @param {number} delay - délai minimum entre deux envois (ms). Défaut : 60s.
+ * @returns {boolean} true si trop tôt pour renvoyer
+ */
+function isRateLimited(key, delay = 60000) {
+  try {
+    const last = parseInt(localStorage.getItem(key) || "0", 10);
+    const now = Date.now();
+    if (now - last < delay) return true;
+    localStorage.setItem(key, String(now));
+    return false;
+  } catch (_) {
+    return false; // localStorage désactivé → on laisse passer
+  }
+}
+
 /* ---------- Contact form ---------- */
 function initContactForm() {
   const form = document.querySelector("[data-form='contact']");
@@ -281,6 +314,20 @@ function initContactForm() {
     setStatus(status, null, "");
 
     const fd = new FormData(form);
+
+    // ── Honeypot : si rempli, c'est un bot — on simule un succès silencieux
+    if (isHoneypotFilled(fd)) {
+      form.reset();
+      setStatus(status, "success", "Message envoyé. Je vous réponds sous 24h ouvrées.");
+      return;
+    }
+
+    // ── Rate limiting : 60s minimum entre deux envois
+    if (isRateLimited("rl_contact", 60000)) {
+      setStatus(status, "error", "Merci de patienter quelques instants avant de renvoyer.");
+      return;
+    }
+
     const data = {
       type: "contact",
       name: fd.get("name"),
@@ -326,6 +373,20 @@ function initImmoForm() {
     setStatus(status, null, "");
 
     const fd = new FormData(form);
+
+    // ── Honeypot : si rempli, c'est un bot — on simule un succès silencieux
+    if (isHoneypotFilled(fd)) {
+      form.reset();
+      setStatus(status, "success", "Merci pour votre contribution. Je reviens vers vous dès que la démo est prête.");
+      return;
+    }
+
+    // ── Rate limiting : 120s minimum entre deux envois
+    if (isRateLimited("rl_immoai", 120000)) {
+      setStatus(status, "error", "Merci de patienter quelques instants avant de renvoyer.");
+      return;
+    }
+
     const data = {
       type: "immoai_research",
       q1_time_consuming: fd.get("q1"),

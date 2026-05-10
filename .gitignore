@@ -38,5 +38,8 @@ build/
 
 # Local working files (not deployed)
 documents/
+Rapports Claude/
 index-v2.html
 audit_ameliorations_site.pdf
+rapport_securite_site.pdf
+*.pdf
