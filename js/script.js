@@ -154,28 +154,35 @@ function initCustomCursor() {
   const ring = cursor.querySelector(".cursor__ring");
   if (!dot || !ring) return;
 
-  let mouseX = window.innerWidth / 2;
-  let mouseY = window.innerHeight / 2;
-  let ringX = mouseX;
-  let ringY = mouseY;
+  let mouseX = 0;
+  let mouseY = 0;
+  let ringX = 0;
+  let ringY = 0;
+  let started = false;
+
+  function tick() {
+    dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+    ringX += (mouseX - ringX) * 0.14;
+    ringY += (mouseY - ringY) * 0.14;
+    ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
+    requestAnimationFrame(tick);
+  }
+
+  // Hide cursor until first real mousemove (avoids snap-from-origin)
+  cursor.classList.add("is-hidden");
 
   document.addEventListener("mousemove", (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
+    if (!started) {
+      // Sync ring instantly on first move, then start the animation loop
+      ringX = mouseX;
+      ringY = mouseY;
+      cursor.classList.remove("is-hidden");
+      tick();
+      started = true;
+    }
   }, { passive: true });
-
-  function tick() {
-    // Dot: follows mouse precisely
-    dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
-
-    // Ring: lerp 0.14
-    ringX += (mouseX - ringX) * 0.14;
-    ringY += (mouseY - ringY) * 0.14;
-    ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
-
-    requestAnimationFrame(tick);
-  }
-  tick();
 
   // Hover state on interactive elements
   const hoverSelector =

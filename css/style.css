@@ -342,7 +342,7 @@ section { padding-block: clamp(4rem, 10vw, 8rem); }
 }
 .primary-nav__list {
   display: flex;
-  gap: var(--space-6);
+  gap: var(--space-5);
   align-items: center;
 }
 .primary-nav__link {
@@ -350,6 +350,7 @@ section { padding-block: clamp(4rem, 10vw, 8rem); }
   color: var(--color-text);
   position: relative;
   padding: 0.25rem 0;
+  white-space: nowrap;
   transition: color var(--duration-fast) var(--ease);
 }
 .primary-nav__link::after {
