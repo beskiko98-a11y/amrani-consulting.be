@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initBackToTop();
   initReveal();
   initMagneticCTA();
+  initCustomCursor();
   initContactForm();
   initImmoForm();
   initCurrentYear();
@@ -133,6 +134,60 @@ function initMagneticCTA() {
       btn.style.transform = "";
     });
   });
+}
+
+/* ---------- Custom cursor (desktop, hover-capable only) ---------- *
+ * Two layers: a small gold dot that tracks the mouse exactly, and a
+ * larger ring that lags behind via linear interpolation. On hover of
+ * any interactive element, both grow. Disabled on touch / reduced motion.
+ */
+function initCustomCursor() {
+  const supportsHover =
+    window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const reducedMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!supportsHover || reducedMotion) return;
+
+  const cursor = document.querySelector(".cursor");
+  if (!cursor) return;
+  const dot = cursor.querySelector(".cursor__dot");
+  const ring = cursor.querySelector(".cursor__ring");
+  if (!dot || !ring) return;
+
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let ringX = mouseX;
+  let ringY = mouseY;
+
+  document.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  }, { passive: true });
+
+  function tick() {
+    // Dot: follows mouse precisely
+    dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+
+    // Ring: lerp 0.14
+    ringX += (mouseX - ringX) * 0.14;
+    ringY += (mouseY - ringY) * 0.14;
+    ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
+
+    requestAnimationFrame(tick);
+  }
+  tick();
+
+  // Hover state on interactive elements
+  const hoverSelector =
+    'a, button, input, textarea, select, label, [role="button"], summary, .card';
+  document.querySelectorAll(hoverSelector).forEach((el) => {
+    el.addEventListener("mouseenter", () => cursor.classList.add("is-hover"));
+    el.addEventListener("mouseleave", () => cursor.classList.remove("is-hover"));
+  });
+
+  // Hide when leaving / re-entering the document
+  document.addEventListener("mouseleave", () => cursor.classList.add("is-hidden"));
+  document.addEventListener("mouseenter", () => cursor.classList.remove("is-hidden"));
 }
 
 /* ---------- Auto current year in footer ---------- */

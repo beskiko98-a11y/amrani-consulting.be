@@ -35,3 +35,8 @@ build/
 # Claude Code / AI assistants
 .claude/
 .ai/
+
+# Local working files (not deployed)
+documents/
+index-v2.html
+audit_ameliorations_site.pdf
