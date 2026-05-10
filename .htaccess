@@ -9,6 +9,21 @@ RewriteEngine On
 RewriteCond %{HTTPS} off
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
+# ── URLs propres : supprime l'extension .html ──────────────
+# 1. Cas spécial : /index.html ou /index redirigent vers /
+RewriteCond %{THE_REQUEST} \s/+index(\.html)?[\s?] [NC]
+RewriteRule ^ / [R=301,L,NE]
+
+# 2. Toute URL en .html redirige vers la version sans (SEO 301)
+RewriteCond %{THE_REQUEST} \s/+(.+?)\.html[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L,NE]
+
+# 3. Si /page n'existe pas mais /page.html existe, sert le .html en interne
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+?)/?$ $1.html [L]
+
 # ── Masquer les informations serveur ───────────────────────
 ServerTokens Prod
 ServerSignature Off
