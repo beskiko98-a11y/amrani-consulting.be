@@ -1569,6 +1569,27 @@ section { padding-block: clamp(4rem, 10vw, 8rem); }
 .timeline-item__sub {
   font-size: var(--fs-sm);
   color: var(--color-text-muted);
+  line-height: 1.55;
+}
+.timeline-item__sub strong {
+  color: var(--color-navy);
+  font-weight: 600;
+}
+.timeline-item__verify {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: 0.5rem;
+  font-size: var(--fs-xs);
+  color: var(--color-gold-text);
+  font-weight: 500;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
+  transition: border-color var(--duration-fast) var(--ease);
+  white-space: nowrap;
+}
+.timeline-item__verify:hover {
+  border-bottom-color: var(--color-gold);
 }
 
 .langs { display: grid; gap: var(--space-4); }

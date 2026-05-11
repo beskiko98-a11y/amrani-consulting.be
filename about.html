@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" />
-  <link rel="stylesheet" href="css/style.css?v=20260511-3" />
+  <link rel="stylesheet" href="css/style.css?v=20260511-4" />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%230A1929'/><text x='50%25' y='58%25' font-family='Georgia,serif' font-size='34' fill='%23C8A04D' text-anchor='middle' font-style='italic'>A</text></svg>" />
 
@@ -54,7 +54,20 @@
       { "@type": "EducationalOrganization", "name": "Antagone" }
     ],
     "hasCredential": [
-      { "@type": "EducationalOccupationalCredential", "name": "Technicien Support PC et Réseaux", "credentialCategory": "certification", "recognizedBy": { "@type": "Organization", "name": "Europass" } }
+      {
+        "@type": "EducationalOccupationalCredential",
+        "name": "Claude Code in Action",
+        "credentialCategory": "certification",
+        "recognizedBy": { "@type": "Organization", "name": "Anthropic" },
+        "url": "https://verify.skilljar.com/c/9wkr5cs8wknd",
+        "dateCreated": "2026-05-10"
+      },
+      {
+        "@type": "EducationalOccupationalCredential",
+        "name": "Technicien Support PC et Réseaux",
+        "credentialCategory": "certification",
+        "recognizedBy": { "@type": "Organization", "name": "Europass" }
+      }
     ]
   }
   </script>
@@ -163,7 +176,7 @@
             <dl class="profile-stats">
               <div>
                 <dt>Statut</dt>
-                <dd>Certifié <small>CFITECH / Europass</small></dd>
+                <dd>Certifié <small>Anthropic · CFITECH</small></dd>
               </div>
               <div>
                 <dt>Pratique IA</dt>
@@ -213,6 +226,16 @@
                 <h3>Formations &amp; certifications</h3>
               </header>
               <div class="timeline">
+                <div class="timeline-item">
+                  <span class="timeline-item__year">2026</span>
+                  <div>
+                    <p class="timeline-item__title">Claude Code in Action</p>
+                    <p class="timeline-item__sub">
+                      Certification officielle <strong>Anthropic</strong> — développement logiciel assisté par IA avec Claude Code.
+                      <a href="https://verify.skilljar.com/c/9wkr5cs8wknd" target="_blank" rel="noopener" class="timeline-item__verify">Vérifier le certificat <span aria-hidden="true">↗</span></a>
+                    </p>
+                  </div>
+                </div>
                 <div class="timeline-item">
                   <span class="timeline-item__year">2024</span>
                   <div>
@@ -416,6 +439,6 @@
     </div>
   </div>
 
-  <script src="js/script.js?v=20260511-3" defer></script>
+  <script src="js/script.js?v=20260511-4" defer></script>
 </body>
 </html>
