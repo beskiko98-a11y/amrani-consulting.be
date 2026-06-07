@@ -14,6 +14,10 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 RewriteCond %{THE_REQUEST} \s/+index(\.html)?[\s?] [NC]
 RewriteRule ^ / [R=301,L,NE]
 
+# 1b. /path/index ou /path/index.html → /path/ (évite duplicate content)
+RewriteCond %{THE_REQUEST} \s/+(.+/)index(\.html)?[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L,NE]
+
 # 2. Toute URL en .html redirige vers la version sans (SEO 301)
 RewriteCond %{THE_REQUEST} \s/+(.+?)\.html[\s?] [NC]
 RewriteRule ^ /%1 [R=301,L,NE]
