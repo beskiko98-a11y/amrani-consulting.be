@@ -764,6 +764,18 @@ section { padding-block: clamp(4rem, 10vw, 8rem); }
   letter-spacing: 0;
 }
 
+/* ---------- Hero H2 subheading (SEO) ---------- */
+.hero__h2 {
+  font-family: var(--font-sans);
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--color-cream);
+  max-width: 56ch;
+  margin: 0 0 var(--space-6);
+  opacity: 0.95;
+}
+
 /* ---------- Hero stacked typography ---------- */
 .hero__title-stacked {
   font-family: var(--font-display);
