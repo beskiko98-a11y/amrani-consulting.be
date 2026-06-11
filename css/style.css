@@ -509,37 +509,40 @@ section { padding-block: clamp(4rem, 10vw, 8rem); }
   left: 0;
   pointer-events: none;
   z-index: 9999;
+  will-change: transform;
+}
+/* Le JS pose un translate3d inline sur __dot/__ring ; le grossissement
+   au survol vit donc sur ::after (scale), jamais sur width/height. */
+.cursor__dot::after,
+.cursor__ring::after {
+  content: "";
+  display: block;
   border-radius: 50%;
   will-change: transform;
-  transition: width 0.3s var(--ease), height 0.3s var(--ease),
-              border-color 0.3s var(--ease), background 0.3s var(--ease),
-              opacity 0.3s var(--ease);
+  transition: transform 0.3s var(--ease), border-color 0.3s var(--ease),
+              background 0.3s var(--ease), opacity 0.3s var(--ease);
 }
-.cursor__dot {
+.cursor__dot::after {
   width: 6px;
   height: 6px;
   margin: -3px 0 0 -3px;
   background: var(--color-gold);
 }
-.cursor__ring {
+.cursor__ring::after {
   width: 30px;
   height: 30px;
   margin: -15px 0 0 -15px;
   border: 1px solid rgba(176, 141, 87, 0.45);
 }
-.cursor.is-hover .cursor__dot {
-  width: 10px;
-  height: 10px;
-  margin: -5px 0 0 -5px;
+.cursor.is-hover .cursor__dot::after {
+  transform: scale(1.667);
 }
-.cursor.is-hover .cursor__ring {
-  width: 48px;
-  height: 48px;
-  margin: -24px 0 0 -24px;
+.cursor.is-hover .cursor__ring::after {
+  transform: scale(1.6);
   border-color: rgba(176, 141, 87, 0.8);
 }
-.cursor.is-hidden .cursor__dot,
-.cursor.is-hidden .cursor__ring { opacity: 0; }
+.cursor.is-hidden .cursor__dot::after,
+.cursor.is-hidden .cursor__ring::after { opacity: 0; }
 
 /* ---------- Status badge (Disponible) ---------- */
 .status-badge {
@@ -887,10 +890,13 @@ section { padding-block: clamp(4rem, 10vw, 8rem); }
   position: fixed;
   top: 0; left: 0;
   height: 2px;
-  width: 0%;
+  width: 100%;
   background: var(--color-gold);
   z-index: 200;
-  transition: width 80ms linear;
+  transform: scaleX(0);
+  transform-origin: 0 0;
+  transition: transform 80ms linear;
+  will-change: transform;
 }
 
 /* ---------- Back to top ---------- */
@@ -1090,6 +1096,25 @@ section { padding-block: clamp(4rem, 10vw, 8rem); }
   transition: all var(--duration) var(--ease);
 }
 .card__link:hover { border-bottom-color: var(--color-gold); color: var(--color-gold-text); }
+
+/* Services homepage grid — asymmetric: featured card full-width, two equal below */
+.services-grid { gap: var(--space-6); }
+@media (min-width: 768px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) {
+  .services-grid .card--featured { grid-column: 1 / -1; }
+}
+
+/* Featured card (navy) */
+.card--featured {
+  background: var(--color-navy);
+  border-color: transparent;
+  color: var(--color-cream);
+}
+.card--featured .card__title { color: var(--color-cream); }
+.card--featured .card__text { color: rgba(244, 241, 235, 0.78); }
+.card--featured .card__link { color: var(--color-gold-soft); border-bottom-color: transparent; }
+.card--featured .card__link:hover { color: var(--color-gold); border-bottom-color: var(--color-gold); }
+.card--featured::before { background: var(--color-gold); }
 
 /* =========================================================
    SERVICE — long form (services.html)
@@ -1862,7 +1887,7 @@ section { padding-block: clamp(4rem, 10vw, 8rem); }
 @media (min-width: 768px) {
   .site-footer__inner { grid-template-columns: 1.5fr 1fr 1fr; gap: var(--space-10); }
 }
-.site-footer h4 {
+.site-footer h3 {
   font-family: var(--font-mono);
   font-size: var(--fs-xs);
   text-transform: uppercase;

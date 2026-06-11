@@ -72,8 +72,8 @@ function initReadingProgress() {
   const onScroll = () => {
     const h = document.documentElement;
     const max = h.scrollHeight - h.clientHeight;
-    const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
-    bar.style.width = pct + "%";
+    const pct = max > 0 ? h.scrollTop / max : 0;
+    bar.style.transform = "scaleX(" + pct + ")";
   };
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });

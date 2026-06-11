@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-11T00:00:00Z",
+  "title": "Design System: Amrani Consulting",
+  "extensions": {
+    "colorMeta": {
+      "navy":         { "role": "primary",  "displayName": "Midnight Brief",   "canonical": "oklch(0.13 0.046 244)", "tonalRamp": ["#020508","#060e18","#0a1626","#152236","#1f3048","#2d455f","#445e7a","#7090ad"] },
+      "navy-depth":   { "role": "primary",  "displayName": "Midnight Depth",   "canonical": "oklch(0.18 0.046 244)", "tonalRamp": ["#020508","#060e18","#0a1626","#0f1f33","#1a2d44","#273d56","#3d5570","#6d93b3"] },
+      "gold":         { "role": "secondary","displayName": "Burnished Gold",   "canonical": "oklch(0.61 0.095 75)",  "tonalRamp": ["#2d1e08","#4a3010","#6b4d1a","#8a6630","#b08d57","#c9a978","#d4b584","#eedfc0"] },
+      "gold-text":    { "role": "secondary","displayName": "Ledger Gold",      "canonical": "oklch(0.44 0.095 75)",  "tonalRamp": ["#2d1e08","#4a3010","#6b4d1a","#7c5a1e","#8a6630","#b08d57","#c9a978","#d4b584"] },
+      "cream":        { "role": "neutral",  "displayName": "Archive White",    "canonical": "oklch(0.96 0.012 87)",  "tonalRamp": ["#2b2620","#4a3f34","#7a6b59","#9e8d79","#c5b09a","#ddd4c0","#ede8dc","#f4f1eb"] },
+      "ink":          { "role": "neutral",  "displayName": "Deep Ink",         "canonical": "oklch(0.15 0.008 250)", "tonalRamp": ["#0a0a0a","#1a1a1a","#2d2d2d","#444444","#6b7280","#8a909a","#b0b5be","#e0e3e8"] },
+      "text-soft":    { "role": "neutral",  "displayName": "Ink Soft",         "canonical": "oklch(0.38 0.024 248)", "tonalRamp": ["#111827","#1f2937","#374151","#4a5568","#6b7280","#9ca3af","#d1d5db","#f3f4f6"] },
+      "border":       { "role": "neutral",  "displayName": "Border Warm",      "canonical": "oklch(0.85 0.015 90)",  "tonalRamp": ["#a09070","#bfad90","#cfc3ab","#dcd5c2","#e5dfcd","#ede8dc","#f4f1eb","#faf9f5"] }
+    },
+    "typographyMeta": {
+      "display":       { "displayName": "Display",       "purpose": "Hero headings and page titles. Max 4.5rem (72px). Playfair Display 400." },
+      "headline":      { "displayName": "Headline",      "purpose": "Section headings (h2). One per major section." },
+      "title":         { "displayName": "Title",         "purpose": "Sub-section headings (h3), card titles." },
+      "body":          { "displayName": "Body",          "purpose": "Paragraphs. Max 68ch line length. Color: #4A5568 on light backgrounds." },
+      "label":         { "displayName": "Label",         "purpose": "UI labels, button text, metadata." },
+      "mono-eyebrow":  { "displayName": "Mono Eyebrow",  "purpose": "Section kickers. Sparingly — one per section. Preceded by 28px gold bar." }
+    },
+    "shadows": [
+      { "name": "ambient",  "value": "0 1px 2px rgba(10, 25, 41, 0.05)",     "purpose": "Barely perceptible card differentiation. Almost never needed." },
+      { "name": "card",     "value": "0 4px 16px rgba(10, 25, 41, 0.08)",    "purpose": "Hover lift on interactive cards. Not at rest." },
+      { "name": "elevated", "value": "0 24px 48px -12px rgba(10, 25, 41, 0.18)", "purpose": "Modals, dropdowns, overlays." },
+      { "name": "gold-glow","value": "0 8px 24px rgba(176, 141, 87, 0.25)",  "purpose": "Primary CTA button on hover. Brand signature." }
+    ],
+    "motion": [
+      { "name": "ease",      "value": "cubic-bezier(0.22, 1, 0.36, 1)",  "purpose": "Default easing for state transitions." },
+      { "name": "ease-out",  "value": "cubic-bezier(0.16, 1, 0.3, 1)",   "purpose": "Entrance animations — exits use linear or short ease-in." },
+      { "name": "fast",      "value": "200ms",  "purpose": "Micro-interactions: hover color, focus ring." },
+      { "name": "default",   "value": "400ms",  "purpose": "Component transitions: button lift, card hover." },
+      { "name": "slow",      "value": "700ms",  "purpose": "Section entrances, scroll-driven reveals." }
+    ],
+    "breakpoints": [
+      { "name": "mobile",  "value": "375px",  "purpose": "Primary mobile QA target." },
+      { "name": "tablet",  "value": "768px",  "purpose": "Tablet QA target. Nav collapses at or below this." },
+      { "name": "desktop", "value": "1240px", "purpose": "Max container width." }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The main CTA. Gold pill with navy text at rest; darkens to gold-dark with cream text on hover. Arrow slides right.",
+      "html": "<button class=\"ds-btn-primary\">Discutons <span class=\"ds-btn-arrow\">→</span></button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 15px 26px; border-radius: 999px; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 500; letter-spacing: 0.01em; background: #B08D57; color: #0A1626; border: 1px solid #B08D57; cursor: pointer; transition: all 400ms cubic-bezier(0.22, 1, 0.36, 1); white-space: nowrap; } .ds-btn-arrow { display: inline-block; transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-btn-primary:hover { background: #6B4D1A; border-color: #6B4D1A; color: #F4F1EB; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(176, 141, 87, 0.25); } .ds-btn-primary:hover .ds-btn-arrow { transform: translateX(4px); } .ds-btn-primary:focus-visible { outline: 2px solid #B08D57; outline-offset: 3px; border-radius: 999px; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Secondary CTA. Transparent with navy border; fills to navy on hover.",
+      "html": "<button class=\"ds-btn-outline\">Voir les services <span class=\"ds-btn-arrow\">→</span></button>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; gap: 8px; padding: 15px 26px; border-radius: 999px; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 500; letter-spacing: 0.01em; background: transparent; color: #0A1626; border: 1px solid #0A1626; cursor: pointer; transition: all 400ms cubic-bezier(0.22, 1, 0.36, 1); white-space: nowrap; } .ds-btn-arrow { display: inline-block; transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-btn-outline:hover { background: #0A1626; color: #F4F1EB; transform: translateY(-2px); } .ds-btn-outline:hover .ds-btn-arrow { transform: translateX(4px); } .ds-btn-outline:focus-visible { outline: 2px solid #B08D57; outline-offset: 3px; border-radius: 999px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Inline tertiary action. Text only with a bottom underline; no fill, no pill. Used alongside body copy.",
+      "html": "<button class=\"ds-btn-ghost\">En savoir plus</button>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; gap: 8px; padding: 8px 0; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 500; background: transparent; color: #0A1626; border: none; border-bottom: 1px solid currentColor; border-radius: 0; cursor: pointer; transition: color 200ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-btn-ghost:hover { color: #7C5A1E; } .ds-btn-ghost:focus-visible { outline: 2px solid #B08D57; outline-offset: 3px; border-radius: 2px; }"
+    },
+    {
+      "name": "Nav Link",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Primary nav link. Gold underline scales in from right on hover, left to right on active/current.",
+      "html": "<nav><a href=\"/services\" class=\"ds-nav-link\">Services</a></nav>",
+      "css": ".ds-nav-link { font-family: 'Inter', sans-serif; font-size: 15px; color: #1A1A1A; position: relative; padding: 4px 0; white-space: nowrap; transition: color 200ms cubic-bezier(0.22, 1, 0.36, 1); text-decoration: none; } .ds-nav-link::after { content: ''; position: absolute; left: 0; bottom: -2px; width: 100%; height: 1px; background: #B08D57; transform: scaleX(0); transform-origin: right center; transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-nav-link:hover::after { transform: scaleX(1); transform-origin: left center; } .ds-nav-link[aria-current='page']::after { transform: scaleX(1); transform-origin: left center; } .ds-nav-link[aria-current='page'] { color: #0A1626; font-weight: 500; }"
+    },
+    {
+      "name": "Eyebrow Label",
+      "kind": "custom",
+      "description": "Section kicker. JetBrains Mono, uppercase, preceded by a 28px gold bar. Sparingly — at most one per section.",
+      "html": "<span class=\"ds-eyebrow\">Services</span>",
+      "css": ".ds-eyebrow { display: inline-flex; align-items: center; gap: 12px; font-family: 'JetBrains Mono', ui-monospace, 'SF Mono', Consolas, monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.16em; color: #6B7280; font-weight: 500; } .ds-eyebrow::before { content: ''; width: 28px; height: 1px; background: #B08D57; flex-shrink: 0; }"
+    },
+    {
+      "name": "Service Card",
+      "kind": "card",
+      "description": "Content card for service listings. Flat at rest; light lift on hover. Full border — never side-stripe.",
+      "html": "<article class=\"ds-card\"><h3 class=\"ds-card-title\">Support IT</h3><p class=\"ds-card-body\">Assistance informatique sur mesure pour PME bruxelloises.</p></article>",
+      "css": ".ds-card { background: #F4F1EB; border: 1px solid #DCD5C2; border-radius: 12px; padding: 32px; transition: box-shadow 400ms cubic-bezier(0.22, 1, 0.36, 1), transform 400ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-card:hover { box-shadow: 0 4px 16px rgba(10, 25, 41, 0.08); transform: translateY(-2px); } .ds-card-title { font-family: 'Playfair Display', serif; font-size: clamp(1.375rem, 2vw, 1.625rem); font-weight: 500; line-height: 1.08; letter-spacing: -0.015em; color: #1A1A1A; margin-bottom: 12px; } .ds-card-body { font-family: 'Inter', sans-serif; font-size: 17px; line-height: 1.6; color: #4A5568; max-width: 68ch; margin: 0; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "description": "Form text field. Warm-tinted background, gold focus ring.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Nom</span><input class=\"ds-input\" type=\"text\" placeholder=\"Votre nom\" /></label>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 8px; } .ds-field-label { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; color: #4A5568; } .ds-input { font-family: 'Inter', sans-serif; font-size: 17px; background: #EDE8DC; border: 1px solid #DCD5C2; border-radius: 8px; padding: 12px 16px; color: #1A1A1A; transition: border-color 200ms, outline 200ms; outline: none; } .ds-input::placeholder { color: #9ca3af; } .ds-input:focus { border-color: #0A1626; outline: 2px solid #B08D57; outline-offset: 0; border-radius: 8px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Consulting Partner",
+    "overview": "This is the design language of someone who has done this before and doesn't need to prove it. Composed, strategic, and unhurried — every element signals competence through restraint rather than loudness. The palette is a midnight boardroom with one precise accent: gold that is never decorative but always intentional. Typography shifts registers deliberately: Playfair Display for gravitas, Inter for clarity, JetBrains Mono for the precision of a specialist.\n\nThe system is mobile-first and bilingual in register — it speaks to the PME owner who has five minutes and a business problem, not a developer reading a spec. Every page has one clear next step. Shadows appear only when they carry information. Motion is purposeful and calm; no bounce, no flourish.\n\nWhat this system explicitly rejects: transactional freelance profiles (Fiverr/Malt grids, hourly-rate energy, star ratings), generic IT agency stock aesthetics (stock photos of handshakes, blue gradient heroes), and anything that signals 'this was assembled from a template.'",
+    "keyCharacteristics": [
+      "Dark navy anchors the brand; cream is the reading surface; gold is a precision accent used sparingly",
+      "Playfair Display italic for emphasis — gold on dark, italic on light",
+      "Pill-radius CTAs, flat cards, grain overlay on navy sections",
+      "Single clear CTA per section; no competing calls to action",
+      "Reduced-motion alternative for every animation; accessibility-first throughout"
+    ],
+    "rules": [
+      { "name": "The One Voice Rule",      "body": "Gold appears on at most 10% of any given screen. A page where gold is everywhere has no gold at all. Its rarity is the message.", "section": "colors" },
+      { "name": "The Safe-Gold Rule",      "body": "#B08D57 (Burnished Gold) is decoration only. For any gold text on a light background, use #7C5A1E (Ledger Gold) exclusively. Contrast at #B08D57 on cream is 2.8:1 — prohibited.", "section": "colors" },
+      { "name": "The Italic Accent Rule",  "body": "<em> elements render in Ledger Gold on light sections and Soft Gold on dark sections. This is the primary typographic signal for proper names, specialist terms, and brand taglines — not for generic emphasis.", "section": "typography" },
+      { "name": "The Mono Signal Rule",    "body": "JetBrains Mono appears only in the eyebrow/overline context. Never in body copy or headings.", "section": "typography" },
+      { "name": "The Grain Truth",         "body": "Navy sections carry a subtle SVG fractalNoise grain overlay at 50% opacity, mix-blend-mode: overlay. Cream sections are clean — no texture.", "section": "elevation" },
+      { "name": "The Flat-by-Default Rule","body": "At rest, all surfaces are flat. The first shadow the eye encounters should be in a hover or focus state — never on an inert card in a grid.", "section": "elevation" }
+    ],
+    "dos": [
+      "Use #7C5A1E (Ledger Gold) for any gold text on a cream/light background. Never #B08D57.",
+      "Keep gold to ≤10% of any screen's visible area.",
+      "Apply text-wrap: balance to h1–h3 and text-wrap: pretty to long prose.",
+      "Include a @media (prefers-reduced-motion: reduce) alternative for every animation.",
+      "End every page with one single, unambiguous CTA pointing toward contact.",
+      "Use full pill radius on all buttons — the pill is a brand signature.",
+      "Mention Brussels context explicitly in hero and about copy.",
+      "Keep shadows flat at rest; first shadow appears only on hover or focus."
+    ],
+    "donts": [
+      "Don't use #B08D57 (Burnished Gold) for body text on cream backgrounds — 2.8:1 contrast fails WCAG AA.",
+      "Don't create transactional layouts: hourly rate badges, star ratings, package grids.",
+      "Don't use stock-photo IT agency aesthetics: handshakes, server rooms, group collaboration photos.",
+      "Don't add a side-stripe border (border-left > 1px as colored accent) to cards or callouts.",
+      "Don't apply gradient text (background-clip: text).",
+      "Don't use the eyebrow label on every section heading — it's a signal, not scaffolding.",
+      "Don't introduce new color hues. The palette is closed: navy, cream, gold.",
+      "Don't use Playfair Display for body text — display-only.",
+      "Don't reinstate fixed day-rate pricing. Pricing is always 'sur mesure'."
+    ]
+  }
+}

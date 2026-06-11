@@ -1,0 +1,7 @@
+{
+  "files": ["*.html", "services/*.html"],
+  "exclude": ["graphify-out/**", ".claude/**"],
+  "insertBefore": "</body>",
+  "commentSyntax": "html",
+  "cspChecked": true
+}

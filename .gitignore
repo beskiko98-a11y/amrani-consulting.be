@@ -35,6 +35,7 @@ build/
 # Claude Code / AI assistants
 .claude/
 .ai/
+graphify-out/
 
 # Local working files (not deployed)
 documents/
